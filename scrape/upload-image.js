@@ -66,7 +66,12 @@ if (require.main === module) {
     console.log(chalk.cyan.bold('\n=== Image Uploader ===\n'));
 
     rl.question(chalk.green('? ') + 'Masukkan path file gambar (contoh: ./image.png): ', async (answer) => {
-        const filePath = answer.trim();
+        let filePath = answer.trim();
+
+        // Strip quotes if any (common when copy-pasting paths with spaces)
+        if ((filePath.startsWith('"') && filePath.endsWith('"')) || (filePath.startsWith("'") && filePath.endsWith("'"))) {
+            filePath = filePath.slice(1, -1);
+        }
 
         if (!filePath) {
             console.log(chalk.red('❌ Path file tidak boleh kosong.'));
