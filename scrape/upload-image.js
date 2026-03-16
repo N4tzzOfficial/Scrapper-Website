@@ -35,9 +35,7 @@ async function uploadImage(filePath) {
         // For CLI, we need an absolute domain.
 
         if (!process.env.UPLOAD_BASE_URL) {
-            console.log(chalk.yellow('⚠️  UPLOAD_BASE_URL is not set in environment. This script requires a full URL.'));
-            console.log(chalk.yellow('   Example usage: UPLOAD_BASE_URL=https://your-website.com node scrape/upload-image.js'));
-            targetUrl = `http://localhost:3000/api/upload`; // Defaulting to localhost if not provided
+            targetUrl = `https://cloud.vtx.my.id/api/upload`; // Defaulting to localhost if not provided
             console.log(chalk.gray(`   Defaulting to ${targetUrl}...\n`));
         }
 
@@ -84,8 +82,28 @@ if (require.main === module) {
         try {
             const result = await uploadImage(filePath);
             console.log(chalk.green('\n✅ Berhasil mengunggah gambar!'));
-            console.log(chalk.white('Respons Server:'));
-            console.log(result);
+
+            if (result.success && result.file) {
+                const file = result.file;
+                const baseUrl = 'https://cloud.vtx.my.id';
+
+                // Format size to MB or KB
+                const sizeStr = file.size > 1024 * 1024
+                    ? (file.size / (1024 * 1024)).toFixed(2) + ' MB'
+                    : (file.size / 1024).toFixed(2) + ' KB';
+
+                console.log(chalk.cyan('--------------------------------------------'));
+                console.log(chalk.white('📄 Nama File    : ') + chalk.yellow(file.originalName));
+                console.log(chalk.white('⚖️  Ukuran       : ') + chalk.yellow(sizeStr));
+                console.log(chalk.white('🏷️  Tipe         : ') + chalk.yellow(file.type));
+                console.log(chalk.cyan('--------------------------------------------'));
+                console.log(chalk.white('🌐 Preview Link : ') + chalk.blue.underline(`${baseUrl}/u/${file.id}`));
+                console.log(chalk.white('📥 Download Link: ') + chalk.blue.underline(`${baseUrl}/d/${file.id}`));
+                console.log(chalk.cyan('--------------------------------------------'));
+            } else {
+                console.log(chalk.white('Respons Server:'));
+                console.log(result);
+            }
         } catch (error) {
             console.log(chalk.red('\n❌ Gagal mengunggah gambar.'));
             console.error(chalk.red(error.message));
