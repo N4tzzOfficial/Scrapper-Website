@@ -41,8 +41,8 @@ Pastikan Anda telah menginstal **Node.js** di sistem Anda. Proyek ini bergantung
 
 1. **Clone repositori ini**:
    ```bash
-   git clone https://github.com/lmna22/scrape.git
-   cd scrape
+   git clone https://github.com/N4tzzOfficial/Scrapper-Website.git
+   cd Scrapper-Website
    ```
 
 2. **Instal dependensi**:
