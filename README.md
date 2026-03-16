@@ -12,6 +12,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 | **TikTok** | [`scrape/tiktok.js`](./scrape/tiktok.js) | [tiktok.com](https://tiktok.com) | Video HD (No Watermark)/Audio Downloader |
 | **Kusonime** | [`scrape/kusonime.js`](./scrape/kusonime.js) | [kusonime.com](https://kusonime.com) | Search, Latest Updates, Detail, Download Links |
 | **Pinterest** | [`scrape/pinterest.js`](./scrape/pinterest.js) | [pinterest.com](https://pinterest.com) | Image/Video Search, Pin/URL Detail, Auto-scroll |
+| **Penyimpanan Gambar** | [`scrape/upload-image.js`](./scrape/upload-image.js) | *Custom API Upload* | Upload gambar lokal ke server via API (`/api/upload`) |
 
 ## ✨ Fitur Utama
 
@@ -29,6 +30,10 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 - **Pencarian Anime & Detail Lengkap**: Ekstrak list, status rilis, banner, dan file JSON dari Kusonime.
 - **Pencarian Cerdas Pinterest**: Menggunakan `puppeteer` untuk by-pass dan mengambil kumpulan gambar berkualitas tinggi dengan auto-scroll dan ekstraksi massal.
 - **Simpan Data**: File detail metadata disimpan apik dalam format JSON.
+
+### 4. Image Uploader (`upload-image.js`)
+- **Upload Gambar via API**: Mengunggah gambar lokal langsung ke server Anda atau endpoint publik.
+- **Form Data Integration**: Memanfaatkan `form-data` dan HTTP POST method layaknya frontend request.
 
 ## 🚀 Prasyarat
 
@@ -67,6 +72,7 @@ node scrape/instagram.js
 node scrape/tiktok.js
 node scrape/kusonime.js
 node scrape/pinterest.js
+node scrape/upload-image.js
 ```
 
 ## 📂 Struktur File
@@ -74,6 +80,7 @@ node scrape/pinterest.js
   - `aio-downloader.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok).
   - `youtube.js`, `instagram.js`, `tiktok.js`: Core logika pengunduh media sosial via API eksternal.
   - `kusonime.js`, `pinterest.js`: Core parser & headless web browser scraper.
+  - `upload-image.js`: Logic upload gambar ke endpoint backend eksternal.
   - `downloads/`: Folder default untuk menyimpan file video/audio (.mp4, .img, .mp3).
 - `package.json`: Informasi proyek dan pustaka node modules dependencies.
 
