@@ -7,13 +7,16 @@ const cheerio = require("cheerio");
 const readline = require("readline");
 const puppeteer = require("puppeteer");
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let rl;
+if (require.main === module) {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+}
 
-function ask(q) {
-  return new Promise((resolve) => rl.question(q, resolve));
+function ask(q, activeRl = rl) {
+  return new Promise((resolve) => activeRl.question(q, resolve));
 }
 
 function delay(ms) {
@@ -160,10 +163,10 @@ function normalizePixivItem(item) {
 
   const title = cleanText(
     item.title ||
-      item.illust_title ||
-      item.alt ||
-      item.caption ||
-      null
+    item.illust_title ||
+    item.alt ||
+    item.caption ||
+    null
   );
 
   const userId =
@@ -176,10 +179,10 @@ function normalizePixivItem(item) {
 
   const link = normalizeArtworkUrl(
     item.link ||
-      item.url ||
-      item.artworkUrl ||
-      item.www_member_illust_medium_url ||
-      null,
+    item.url ||
+    item.artworkUrl ||
+    item.www_member_illust_medium_url ||
+    null,
     id
   );
 
@@ -417,7 +420,7 @@ async function getBestResults(url) {
     if (results.length > 0) {
       return { html, results, method: "axios" };
     }
-  } catch {}
+  } catch { }
 
   const html = await fetchHtmlWithPuppeteer(url);
   const results = extractResultsFromHtml(html);
@@ -459,7 +462,7 @@ async function fetchArtworkPages(artworkId) {
 // Mengambil detail metadata artis jika kosong
 async function fetchArtworkDetails(artworkId) {
   const apiUrl = `https://www.pixiv.net/ajax/illust/${artworkId}?lang=en`;
-  
+
   try {
     const res = await axios.get(apiUrl, {
       headers: {
@@ -481,7 +484,7 @@ async function enrichImages(items) {
 
   for (const item of items) {
     const images = await fetchArtworkPages(item.id);
-    
+
     let artist = item.artist;
     let userId = item.userId;
     let title = item.title;
@@ -588,9 +591,10 @@ async function downloadAllImages(items) {
   return { success, failed, dir: baseDir };
 }
 
-async function main() {
+module.exports = async function handlePixiv(inputUrl, { rl: passedRl } = {}) {
+  const activeRl = passedRl || rl;
   try {
-    const input = (await ask("Masukkan kata kunci pencarian atau tautan Pixiv: ")).trim();
+    const input = inputUrl || (await ask("Masukkan kata kunci pencarian atau tautan Pixiv: ", activeRl)).trim();
     if (!input) {
       console.log("Input tidak boleh kosong.");
       return;
@@ -605,7 +609,7 @@ async function main() {
     if (inputIsUrl && inputIsPixiv) {
       singleMode = true;
     } else {
-      const limitRaw = (await ask("Jumlah data yang ingin diambil? (default 10): ")).trim();
+      const limitRaw = (await ask("Jumlah data yang ingin diambil? (default 10): ", activeRl)).trim();
       limit = Number(limitRaw) > 0 ? Number(limitRaw) : 10;
     }
 
@@ -657,7 +661,7 @@ async function main() {
     fs.writeFileSync("pixiv-results.json", JSON.stringify(finalResults, null, 2), "utf8");
     console.log("Data telah disimpan ke dalam file pixiv-results.json");
 
-    const answer = (await ask("Apakah kamu ingin mengunduh semua gambar? (y/n): ")).trim().toLowerCase();
+    const answer = (await ask("Apakah kamu ingin mengunduh semua gambar? (y/n): ", activeRl)).trim().toLowerCase();
 
     if (answer === "y") {
       console.log("\nMengunduh gambar ke dalam direktori pixiv...\n");
@@ -671,8 +675,10 @@ async function main() {
     console.error("Terjadi kesalahan sistem:");
     console.error(err.message || err);
   } finally {
-    rl.close();
+    if (!passedRl && rl) rl.close();
   }
 }
 
-main();
+if (require.main === module) {
+  module.exports();
+}

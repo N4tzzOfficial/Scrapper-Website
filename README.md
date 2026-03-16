@@ -6,7 +6,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 
 | Nama Scraper | File | Target Website | Fitur Utama |
 | :--- | :--- | :--- | :--- |
-| **All-in-One** | [`scrape/aio-downloader.js`](./scrape/aio-downloader.js) | YouTube, IG, TikTok | Deteksi otomatis URL dan integrasi 3 scraper media downloader. |
+| **All-in-One** | [`scrape/aio-downloader.js`](./scrape/aio-downloader.js) | YouTube, IG, TikTok, Pinterest, Pixiv, X | Deteksi otomatis URL dan integrasi 6 scraper media downloader. |
 | **YouTube** | [`scrape/youtube.js`](./scrape/youtube.js) | [youtube.com](https://youtube.com) | Video/Audio Downloader (Shorts/Videos), Quality Selection |
 | **Instagram** | [`scrape/instagram.js`](./scrape/instagram.js) | [instagram.com](https://instagram.com) | Album/Carousel/Reels Downloader, Quality Selection |
 | **TikTok** | [`scrape/tiktok.js`](./scrape/tiktok.js) | [tiktok.com](https://tiktok.com) | Video HD (No Watermark)/Audio Downloader |
@@ -17,8 +17,8 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 ## ✨ Fitur Utama
 
 ### 1. All-in-One Media Downloader (`aio-downloader.js`)
-- **Smart URL Detection**: Masukkan link dari YouTube, Instagram, atau TikTok, dan biarkan sistem yang menentukan target otomatis.
-- **Terpusat**: Memanggil script spesifik (`youtube.js`, `instagram.js`, `tiktok.js`) tanpa perlu menjalankan file secara manual satu per satu.
+- **Smart URL Detection**: Masukkan link dari YouTube, Instagram, TikTok, Pinterest, Pixiv, atau X (Twitter) dan biarkan sistem yang menentukan target otomatis.
+- **Terpusat**: Memanggil script spesifik (`youtube.js`, `instagram.js`, `tiktok.js`, `pinterest.js`, `pixiv.js`, `x.js`) tanpa perlu menjalankan file secara manual satu per satu.
 
 ### 2. General Media Downloader (`youtube.js`, `instagram.js`, `tiktok.js`)
 - **Interaktif & Berwarna**: Antarmuka Command Line (CLI) menggunakan `chalk` dan `cli-table3` untuk tampilan tabel progres yang rapi.
@@ -58,7 +58,7 @@ Pastikan Anda telah menginstal **Node.js** di sistem Anda. Proyek ini bergantung
 ## 🛠️ Penggunaan
 
 ### Menjalankan All-in-One Downloader (Direkomendasikan)
-Jalankan file `aio-downloader.js` untuk mengunduh media dari YouTube, Instagram, maupun TikTok.
+Jalankan file `aio-downloader.js` untuk mengunduh media dari YouTube, Instagram, TikTok, Pinterest, Pixiv, maupun X/Twitter.
 ```bash
 node scrape/aio-downloader.js
 ```
@@ -77,7 +77,7 @@ node scrape/upload-image.js
 
 ## 📂 Struktur File
 - `scrape/`: Direktori berisi semua script scraper.
-  - `aio-downloader.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok).
+  - `aio-downloader.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok, Pinterest, Pixiv, X/Twitter).
   - `youtube.js`, `instagram.js`, `tiktok.js`: Core logika pengunduh media sosial via API eksternal.
   - `kusonime.js`, `pinterest.js`: Core parser & headless web browser scraper.
   - `upload-image.js`: Logic upload gambar ke endpoint backend eksternal.

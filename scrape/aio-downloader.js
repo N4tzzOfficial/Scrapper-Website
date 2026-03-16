@@ -6,6 +6,9 @@ const chalk = require("chalk");
 const handleYoutube = require("./youtube.js");
 const handleInstagram = require("./instagram.js");
 const handleTiktok = require("./tiktok.js");
+const handlePinterest = require("./pinterest.js");
+const handlePixiv = require("./pixiv.js");
+const handleX = require("./x.js");
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -26,6 +29,15 @@ function detectPlatform(url) {
     if (url.includes("tiktok.com/")) {
         return "tiktok";
     }
+    if (url.includes("pinterest.")) {
+        return "pinterest";
+    }
+    if (url.includes("pixiv.net") || url.includes("pximg.net")) {
+        return "pixiv";
+    }
+    if (url.includes("x.com/") || url.includes("twitter.com/") || url.includes("ssstwitter.com/")) {
+        return "x";
+    }
     return null;
 }
 
@@ -33,10 +45,10 @@ async function main() {
     console.clear();
 
     console.log(chalk.bold.yellow(`
-╔════════════════════════════════════════════════════╗
-║             ALL-IN-ONE MEDIA DOWNLOADER            ║
-║         (YouTube, Instagram, TikTok Support)       ║
-╚════════════════════════════════════════════════════╝
+╔════════════════════════════════════════════════════════════╗
+║                  ALL-IN-ONE MEDIA DOWNLOADER               ║
+║ (YouTube, IG, TikTok, Pinterest, Pixiv, X/Twitter Support) ║
+╚════════════════════════════════════════════════════════════╝
     `));
 
     try {
@@ -51,7 +63,7 @@ async function main() {
 
         if (!platform) {
             console.log(chalk.red('\n✗ URL tidak dikenali atau tidak didukung!'));
-            console.log(chalk.dim('ℹ Mohon masukkan URL dari YouTube, Instagram, atau TikTok.'));
+            console.log(chalk.dim('ℹ Mohon masukkan URL dari YouTube, Instagram, TikTok, Pinterest, Pixiv, atau X/Twitter.'));
             return;
         }
 
@@ -67,6 +79,15 @@ async function main() {
                 break;
             case "tiktok":
                 await handleTiktok(urlInput, { rl });
+                break;
+            case "pinterest":
+                await handlePinterest(urlInput, { rl });
+                break;
+            case "pixiv":
+                await handlePixiv(urlInput, { rl });
+                break;
+            case "x":
+                await handleX(urlInput, { rl });
                 break;
         }
 

@@ -6,13 +6,16 @@ const cheerio = require("cheerio");
 const readline = require("readline");
 const puppeteer = require("puppeteer");
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
+let rl;
+if (require.main === module) {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+  });
+}
 
-function ask(q) {
-  return new Promise((resolve) => rl.question(q, resolve));
+function ask(q, activeRl = rl) {
+  return new Promise((resolve) => activeRl.question(q, resolve));
 }
 
 function delay(ms) {
@@ -121,13 +124,13 @@ function normalizePin(pin) {
 
   const title = cleanText(
     pin.title ||
-      pin.grid_title ||
-      pin.seo_description ||
-      pin.description ||
-      pin.rich_summary?.display_description ||
-      pin.story_pin_data?.title ||
-      pin.alt_text ||
-      null
+    pin.grid_title ||
+    pin.seo_description ||
+    pin.description ||
+    pin.rich_summary?.display_description ||
+    pin.story_pin_data?.title ||
+    pin.alt_text ||
+    null
   );
 
   const rawLink =
@@ -280,9 +283,9 @@ function parseFromRenderedDom(html) {
 
     const title = cleanText(
       img.attr("alt") ||
-        a.attr("aria-label") ||
-        a.text().trim() ||
-        null
+      a.attr("aria-label") ||
+      a.text().trim() ||
+      null
     );
 
     const image =
@@ -423,9 +426,10 @@ async function getBestHtml(url) {
   return { html, method: "puppeteer" };
 }
 
-async function main() {
+module.exports = async function handlePinterest(inputUrl, { rl: passedRl } = {}) {
+  const activeRl = passedRl || rl;
   try {
-    const input = (await ask("Masukkan keyword atau link Pinterest: ")).trim();
+    const input = inputUrl || (await ask("Masukkan keyword atau link Pinterest: ", activeRl)).trim();
 
     if (!input) {
       console.log("Input kosong.");
@@ -441,7 +445,7 @@ async function main() {
     if (inputIsUrl && inputIsPinterest) {
       singleMode = true;
     } else {
-      const limitRaw = (await ask("Jumlah data yang ingin diambil? (default 10): ")).trim();
+      const limitRaw = (await ask("Jumlah data yang ingin diambil? (default 10): ", activeRl)).trim();
       limit = Number(limitRaw) > 0 ? Number(limitRaw) : 10;
     }
 
@@ -506,8 +510,10 @@ async function main() {
     console.error("Terjadi error:");
     console.error(err.message || err);
   } finally {
-    rl.close();
+    if (!passedRl && rl) rl.close();
   }
 }
 
-main();
+if (require.main === module) {
+  module.exports();
+}
