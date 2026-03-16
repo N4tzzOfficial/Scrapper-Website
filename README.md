@@ -6,7 +6,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 
 | Nama Scraper | File | Target Website | Fitur Utama |
 | :--- | :--- | :--- | :--- |
-| **All-in-One** | [`scrape/index.js`](./scrape/index.js) | YouTube, IG, TikTok | Deteksi otomatis URL dan integrasi 3 scraper media downloader. |
+| **All-in-One** | [`scrape/aio-downloader.js`](./scrape/aio-downloader.js) | YouTube, IG, TikTok | Deteksi otomatis URL dan integrasi 3 scraper media downloader. |
 | **YouTube** | [`scrape/youtube.js`](./scrape/youtube.js) | [youtube.com](https://youtube.com) | Video/Audio Downloader (Shorts/Videos), Quality Selection |
 | **Instagram** | [`scrape/instagram.js`](./scrape/instagram.js) | [instagram.com](https://instagram.com) | Album/Carousel/Reels Downloader, Quality Selection |
 | **TikTok** | [`scrape/tiktok.js`](./scrape/tiktok.js) | [tiktok.com](https://tiktok.com) | Video HD (No Watermark)/Audio Downloader |
@@ -15,7 +15,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 
 ## ✨ Fitur Utama
 
-### 1. All-in-One Media Downloader (`index.js`)
+### 1. All-in-One Media Downloader (`aio-downloader.js`)
 - **Smart URL Detection**: Masukkan link dari YouTube, Instagram, atau TikTok, dan biarkan sistem yang menentukan target otomatis.
 - **Terpusat**: Memanggil script spesifik (`youtube.js`, `instagram.js`, `tiktok.js`) tanpa perlu menjalankan file secara manual satu per satu.
 
@@ -53,9 +53,9 @@ Pastikan Anda telah menginstal **Node.js** di sistem Anda. Proyek ini bergantung
 ## 🛠️ Penggunaan
 
 ### Menjalankan All-in-One Downloader (Direkomendasikan)
-Jalankan file `index.js` untuk mengunduh media dari YouTube, Instagram, maupun TikTok.
+Jalankan file `aio-downloader.js` untuk mengunduh media dari YouTube, Instagram, maupun TikTok.
 ```bash
-node scrape/index.js
+node scrape/aio-downloader.js
 ```
 *Sistem akan meminta input URL dan secara otomatis mencarikan scraper yang cocok.*
 
@@ -71,7 +71,7 @@ node scrape/pinterest.js
 
 ## 📂 Struktur File
 - `scrape/`: Direktori berisi semua script scraper.
-  - `index.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok).
+  - `aio-downloader.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok).
   - `youtube.js`, `instagram.js`, `tiktok.js`: Core logika pengunduh media sosial via API eksternal.
   - `kusonime.js`, `pinterest.js`: Core parser & headless web browser scraper.
   - `downloads/`: Folder default untuk menyimpan file video/audio (.mp4, .img, .mp3).
