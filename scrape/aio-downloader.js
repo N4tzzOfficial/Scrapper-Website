@@ -20,7 +20,7 @@ function ask(q) {
 }
 
 function detectPlatform(url) {
-    if (url.includes("youtube.com/watch") || url.includes("youtu.be/")) {
+    if (url.includes("youtube.com/watch") || url.includes("youtu.be/") || url.includes("youtube.com/shorts/")) {
         return "youtube";
     }
     if (url.includes("instagram.com/")) {
