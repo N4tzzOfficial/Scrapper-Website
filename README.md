@@ -11,6 +11,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 | **Instagram** | [`scrape/instagram.js`](./scrape/instagram.js) | [instagram.com](https://instagram.com) | Album/Carousel/Reels Downloader, Quality Selection |
 | **TikTok** | [`scrape/tiktok.js`](./scrape/tiktok.js) | [tiktok.com](https://tiktok.com) | Video HD (No Watermark)/Audio Downloader |
 | **Kusonime** | [`scrape/kusonime.js`](./scrape/kusonime.js) | [kusonime.com](https://kusonime.com) | Search, Latest Updates, Detail, Download Links |
+| **NontonDrama** | [`scrape/nontondrama.js`](./scrape/nontondrama.js) | [tv3.nontondrama.my](https://tv3.nontondrama.my) | Search, Genre, Series, Negara, Tahun, Detail & Download Links |
 | **Pinterest** | [`scrape/pinterest.js`](./scrape/pinterest.js) | [pinterest.com](https://pinterest.com) | Image/Video Search, Pin/URL Detail, Auto-scroll |
 | **Penyimpanan Gambar** | [`scrape/upload-image.js`](./scrape/upload-image.js) | *Custom API Upload* | Upload gambar lokal ke server via API (`/api/upload`) |
 
@@ -26,8 +27,8 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 - **Multiple Downloader ("all")**: Mengunduh seluruh media (seperti Album Carousel Instagram) secara bersamaan secara berurutan.
 - **Real-time Progress Bar**: Fitur yang menunjukkan kecepatan uduhan, progres persentase, serta jumlah file bytes yang berjalan transparan.
 
-### 3. Anime & Image Scraper (`kusonime.js`, `pinterest.js`)
-- **Pencarian Anime & Detail Lengkap**: Ekstrak list, status rilis, banner, dan file JSON dari Kusonime.
+### 3. Anime, Drama & Image Scraper (`kusonime.js`, `nontondrama.js`, `pinterest.js`)
+- **Pencarian Lengkap**: Ekstrak list, status rilis, banner/poster, dan file JSON dari Kusonime & NontonDrama.
 - **Pencarian Cerdas Pinterest**: Menggunakan `puppeteer` untuk by-pass dan mengambil kumpulan gambar berkualitas tinggi dengan auto-scroll dan ekstraksi massal.
 - **Simpan Data**: File detail metadata disimpan apik dalam format JSON.
 
@@ -71,6 +72,7 @@ node scrape/youtube.js
 node scrape/instagram.js
 node scrape/tiktok.js
 node scrape/kusonime.js
+node scrape/nontondrama.js
 node scrape/pinterest.js
 node scrape/upload-image.js
 ```
@@ -79,7 +81,7 @@ node scrape/upload-image.js
 - `scrape/`: Direktori berisi semua script scraper.
   - `aio-downloader.js`: Pusat eksekusi otomatis (YouTube, Instagram, TikTok, Pinterest, Pixiv, X/Twitter).
   - `youtube.js`, `instagram.js`, `tiktok.js`: Core logika pengunduh media sosial via API eksternal.
-  - `kusonime.js`, `pinterest.js`: Core parser & headless web browser scraper.
+  - `kusonime.js`, `nontondrama.js`, `pinterest.js`: Core parser & headless web browser scraper.
   - `upload-image.js`: Logic upload gambar ke endpoint backend eksternal.
   - `downloads/`: Folder default untuk menyimpan file video/audio (.mp4, .img, .mp3).
 - `package.json`: Informasi proyek dan pustaka node modules dependencies.
