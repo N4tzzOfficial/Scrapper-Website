@@ -1,6 +1,6 @@
 # Multi-Scraper CLI
 
-![Total Scrapers](https://img.shields.io/badge/Total_Scrapers-13-brightgreen?style=flat-square)
+![Total Scrapers](https://img.shields.io/badge/Total_Scrapers-14-brightgreen?style=flat-square)
 
 Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari berbagai platform seperti **YouTube**, **Instagram**, **TikTok**, **Kusonime** (anime) dan **Pinterest** (gambar/video). Proyek ini dirancang agar mudah digunakan, interaktif dengan antarmuka CLI yang menarik, dan mendukung pengunduhan langsung ke perangkat Anda.
 
@@ -52,6 +52,10 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 - **Video Upscaling**: Meningkatkan kualitas dan resolusi video hingga 2K menggunakan teknologi kecerdasan buatan (AI).
 - **Fleksibel**: Dapat menerima masukan (input) baik dari tautan URL langsung maupun file video (`mp4`, `webm`, dll) di mesin lokal Anda.
 
+### 7. Brat Text Generator (`brat.js`)
+- **Brat Style Image**: Menghasilkan gambar teks dengan gaya "brat" khas (latar belakang putih, teks hitam blur) persis seperti aslinya.
+- **Presisi Layout 1:1**: Meniru layout, padding, font, dan rotasi agar menyerupai hasil asli *bratgenerator.com*.
+
 ## 🚀 Prasyarat
 
 Pastikan Anda telah menginstal **Node.js** di sistem Anda. Proyek ini bergantung pada pustaka berikut:
@@ -96,7 +100,7 @@ node scrape/pixiv.js
 node scrape/upload-image.js
 node scrape/ssweb.js
 node scrape/hd-video.js
-node scrape/brat.js "teks lucu disini"
+node scrape/brat.js
 ```
 
 ## 📂 Struktur File
@@ -107,6 +111,7 @@ node scrape/brat.js "teks lucu disini"
   - `upload-image.js`: Logic upload gambar ke endpoint backend eksternal.
   - `ssweb.js`: Script untuk menghasilkan screenshot website sesuai perangkat.
   - `hd-video.js`: Script upscaler yang menggunakan AI untuk meningkatkan kualitas video.
+  - `brat.js`: Script pembuat gambar teks bergaya *brat* yang presisi.
   - `downloads/`: Folder default untuk menyimpan file video/audio (.mp4, .img, .mp3).
 - `package.json`: Informasi proyek dan pustaka node modules dependencies.
 
