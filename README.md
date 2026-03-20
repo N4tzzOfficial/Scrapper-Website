@@ -18,6 +18,7 @@ Sebuah alat baris perintah (CLI) sederhana namun kuat untuk mengambil data dari 
 | **Pinterest** | [`scrape/pinterest.js`](./scrape/pinterest.js) | [pinterest.com](https://pinterest.com) | Image/Video Search, Pin/URL Detail, Auto-scroll |
 | **Pixiv** | [`scrape/pixiv.js`](./scrape/pixiv.js) | [pixiv.net](https://pixiv.net) | Pencarian Art, Unduh Gambar Resolusi Original (Auto-Scroll) |
 | **X/Twitter** | [`scrape/x.js`](./scrape/x.js) | [x.com](https://x.com) | Unduh Video/Audio resolusi tinggi dari cuitan Twitter/X |
+| **Brat Generator** | [`scrape/brat.js`](./scrape/brat.js) | [bratgenerator.com](https://www.bratgenerator.com/) | Generate gambar teks bergaya brat putih dengan layout presisi 1:1|
 | **Penyimpanan Gambar** | [`scrape/upload-image.js`](./scrape/upload-image.js) | *Custom API Upload* | Upload gambar lokal ke server via API (`/api/upload`) |
 | **SSWeb** | [`scrape/ssweb.js`](./scrape/ssweb.js) | *Pageshot API* | Screenshot website untuk Desktop, Tablet, dan Mobile |
 | **HD Video Enhancer** | [`scrape/hd-video.js`](./scrape/hd-video.js) | *UnblurImage AI* | Mengeskalasi resolusi video ke 2K menggunakan AI |
@@ -95,6 +96,7 @@ node scrape/pixiv.js
 node scrape/upload-image.js
 node scrape/ssweb.js
 node scrape/hd-video.js
+node scrape/brat.js "teks lucu disini"
 ```
 
 ## 📂 Struktur File
